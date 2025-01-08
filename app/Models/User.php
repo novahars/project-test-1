@@ -44,4 +44,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
+    public function isAgent()
+    {
+        return $this->role === 'agent';
+    }
+    use HasFactory;
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class, 'creator_id'); // Relasi ke Ticket sebagai creator
+    }
 }
